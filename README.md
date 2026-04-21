@@ -75,13 +75,6 @@ Se vuoi anche la voce per il changelog:
 Markdown### Added- Added a percentage-based progress bar using `Write-Progress` to display real-time execution status in the PowerShell console.``Mostra più linee
 ### Added
 - Added a percentage-based progress bar using `Write-Progress` to display real-time execution status in the PowerShell console.
-``
-![PowerShell](https://img.shields.io/badge/PowerShell-5.0%2B%20%7C%207-blue.svg?logo=powershell)
-![Veeam](https://img.shields.io/badge/Veeam-Backup%20%26%20Replication%20v12%20%7C%20v13-brightgreen)
-![Version](https://img.shields.io/badge/Version-13.0.0-blue)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Progress](https://img.shields.io/badge/Progress-Bar%20Enabled-brightgreen?logo=powershell)
-``
 
 ***
 
