@@ -51,6 +51,33 @@ This script has long been – and still is – an excellent learning tool to und
 *   Extremely granular configuration (each report section can be enabled/disabled)
 *   Supports **enterprise** and **MSP** environments
 
+  ✅ Update: Execution Progress Bar
+A percentage-based progress bar has been added to the script to provide real-time feedback during execution.
+While the report is being generated, the script now displays a progress indicator in the PowerShell console, showing:
+
+Current execution phase
+Completion percentage
+Improved user experience for long-running reports
+
+Example output in the console:
+
+
+<img width="758" height="281" alt="image" src="https://github.com/user-attachments/assets/3a601a6d-9391-4818-b5db-e011982fb2f4" />
+The progress bar continues updating throughout the execution until it reaches 100% Completed, making it easier to monitor script progress, especially in large or complex Veeam environments.
+Technical details
+
+Implemented using native PowerShell Write-Progress
+Automatically disabled when running in non-interactive sessions
+Fully compatible with PowerShell 5.x and PowerShell 7
+
+Optional: add to CHANGELOG.md
+Se vuoi anche la voce per il changelog:
+Markdown### Added- Added a percentage-based progress bar using `Write-Progress` to display real-time execution status in the PowerShell console.``Mostra più linee
+
+✅ Optional: badge (extra)
+Se vuoi anche un badge informativo nel README:
+Markdownhttps://img.shields.io/badge/Progress-Bar%20Enabled-success
+
 ***
 
 ## ✅ Prerequisites
