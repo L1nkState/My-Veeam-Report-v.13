@@ -82,7 +82,15 @@ Markdown### Added- Added a percentage-based progress bar using `Write-Progress` 
 
 ## ✅ Prerequisites
 
-<img width="594" height="267" alt="image" src="https://github.com/user-attachments/assets/d04dcb52-70df-45bb-bd52-ffdd7587b520" />
+| Requirement                  | Details                                              |
+|-----------------------------|------------------------------------------------------|
+| Operating System            | Windows Server 2016 / 2019 / 2022                     |
+| PowerShell                  | Version 7.0 or later                                 |
+| Veeam Backup & Replication  | v12 or v13                                           |
+| Veeam PowerShell Module     | Must be installed and importable                     |
+| MyVeeamReportv13.ps1  | Present in the Veeam installation directory          |
+| SMTP Relay                  | Required only if email notifications are enabled     |
+``
 
 
 Note: The script must be run on the Veeam Backup Server or a machine with the Veeam console and PowerShell snap-in installed.
