@@ -76,7 +76,8 @@ Markdown### Added- Added a percentage-based progress bar using `Write-Progress` 
 ### Added
 - Added a percentage-based progress bar using `Write-Progress` to display real-time execution status in the PowerShell console.
 ``
-https://img.shields.io/badge/Progress-Bar%20Enabled-success
+![Progress](https://img.shields.io/badge/Progress-Bar%20Enabled-brightgreen)
+``
 
 ***
 
