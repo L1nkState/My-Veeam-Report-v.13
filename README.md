@@ -90,7 +90,7 @@ Markdown### Added- Added a percentage-based progress bar using `Write-Progress` 
 | Veeam PowerShell Module     | Must be installed and importable                     |
 | MyVeeamReportv13.ps1  | Present in the Veeam installation directory          |
 | SMTP Relay                  | Required only if email notifications are enabled     |
-``
+
 
 
 Note: The script must be run on the Veeam Backup Server or a machine with the Veeam console and PowerShell snap-in installed.
