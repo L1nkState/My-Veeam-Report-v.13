@@ -1,5 +1,5 @@
 
-# My Veeam Report v13 modified fron [@L1nkState](https://github.com/L1nkState)
+# My Veeam Report v13 modified ny [@L1nkState](https://github.com/L1nkState)
 
 **My Veeam Report** is an advanced and highly configurable PowerShell script that generates comprehensive **HTML reports** for **Veeam Backup & Replication**.
 
