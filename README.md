@@ -32,7 +32,7 @@ You can:
 ![Version](https://img.shields.io/badge/Version-13.0.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Progress](https://img.shields.io/badge/Progress-Bar%20Enabled-brightgreen?logo=powershell)
-``
+
 
 
 
@@ -63,7 +63,7 @@ Improved user experience for long-running reports
 
 Example output in the console:
 
-
+![Progress](https://img.shields.io/badge/Progress-Bar%20Enabled-brightgreen?logo=powershell)
 <img width="758" height="281" alt="image" src="https://github.com/user-attachments/assets/3a601a6d-9391-4818-b5db-e011982fb2f4" />
 The progress bar continues updating throughout the execution until it reaches 100% Completed, making it easier to monitor script progress, especially in large or complex Veeam environments.
 Technical details
