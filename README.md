@@ -21,13 +21,8 @@ This script has long been – and still is – an excellent learning tool to und
 
 ## ✅ Prerequisites
 
-Requirement	Details
-OS	Windows Server 2016 / 2019 / 2022
-PowerShell	7 or later
-Veeam B&R	v12 or v13
-Veeam PowerShell Snap-in	Must be installed and importable
-Veeam.Backup.Validator.exe	Present in Veeam installation directory
-SMTP relay	Required only if email notifications are enabled
+<img width="594" height="267" alt="image" src="https://github.com/user-attachments/assets/aa57ba93-63d3-454f-9493-ae0087b7d1e5" />
+
 Note: The script must be run on the Veeam Backup Server or a machine with the Veeam console and PowerShell snap-in installed.
 
 
