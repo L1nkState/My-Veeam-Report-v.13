@@ -74,9 +74,8 @@ Optional: add to CHANGELOG.md
 Se vuoi anche la voce per il changelog:
 Markdown### Added- Added a percentage-based progress bar using `Write-Progress` to display real-time execution status in the PowerShell console.``Mostra più linee
 
-✅ Optional: badge (extra)
-Se vuoi anche un badge informativo nel README:
-Markdownhttps://img.shields.io/badge/Progress-Bar%20Enabled-success
+✅
+https://img.shields.io/badge/Progress-Bar%20Enabled-success
 
 ***
 
