@@ -70,11 +70,12 @@ Implemented using native PowerShell Write-Progress
 Automatically disabled when running in non-interactive sessions
 Fully compatible with PowerShell 5.x and PowerShell 7
 
-Optional: add to CHANGELOG.md
+ CHANGELOG.md
 Se vuoi anche la voce per il changelog:
 Markdown### Added- Added a percentage-based progress bar using `Write-Progress` to display real-time execution status in the PowerShell console.``Mostra più linee
-
-✅
+### Added
+- Added a percentage-based progress bar using `Write-Progress` to display real-time execution status in the PowerShell console.
+``
 https://img.shields.io/badge/Progress-Bar%20Enabled-success
 
 ***
