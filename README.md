@@ -26,6 +26,13 @@ You can:
 
 ***
 
+![PowerShell](https://img.shields.io/badge/PowerShell-5.0%2B%20%7C%207-blue.svg?logo=powershell)
+![Veeam](https://img.shields.io/badge/Veeam-Backup%20%26%20Replication%20v12%20%7C%20v13-brightgreen)
+![Version](https://img.shields.io/badge/Version-13.0.0-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Progress](https://img.shields.io/badge/Progress-Bar%20Enabled-brightgreen?logo=powershell)
+``
+
 # 🛡️ MY Veeam Report v.13
 [![PowerShell](https://img.shields.io/badge/PowerShell-5.0%2B%20%7C%207-blue.svg?logo=powershell)](https://learn.microsoft.com/powershell/)
 [![Veeam](https://img.shields.io/badge/Veeam-Backup%20%26%20Replication%20v12%20%7C%20v13-brightgreen)](https://www.veeam.com/)
