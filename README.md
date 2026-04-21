@@ -21,7 +21,8 @@ This script has long been – and still is – an excellent learning tool to und
 
 ## ✅ Prerequisites
 
-<img width="594" height="267" alt="image" src="https://github.com/user-attachments/assets/aa57ba93-63d3-454f-9493-ae0087b7d1e5" />
+<img width="594" height="267" alt="image" src="https://github.com/user-attachments/assets/d04dcb52-70df-45bb-bd52-ffdd7587b520" />
+
 
 Note: The script must be run on the Veeam Backup Server or a machine with the Veeam console and PowerShell snap-in installed.
 
@@ -101,6 +102,31 @@ All configuration options are defined in:
 ```powershell
 #region User-Variables
 ```
+## 🗓️ Scheduling with Windows Task Scheduler
+
+You can automate the validator using **Windows Task Scheduler**:
+
+1. Open **Task Scheduler** and create a new task.
+2. Set the **Trigger** (e.g., daily at 06:00 AM after backup jobs complete).
+3. Set the **Action** to:
+   - **Program:** `powershell.exe`
+   - **Arguments:**
+     ```
+     -NonInteractive -ExecutionPolicy Bypass -File "C:\Scripts\veeam-BackupValidator.ps1" "YOUR-JOB" "YOUR-SERVER"
+     ```
+4. Run the task as a service account with **Veeam Operator** (or higher) permissions.
+5. Enable **"Run whether user is logged on or not"**.
+
+<img width="632" height="478" alt="image" src="https://github.com/user-attachments/assets/8a474715-02f6-4750-ad18-e6150a09202d" />
+
+<img width="633" height="480" alt="image" src="https://github.com/user-attachments/assets/e112bf16-7a61-4587-932d-7287b331a449" />
+
+Program/script: "C:\Program Files\PowerShell\7\pwsh.exe" Add arguments: -file "C:\Your-dir-script\\MyVeeamReport.ps1
+
+<img width="633" height="657" alt="image" src="https://github.com/user-attachments/assets/cc2f0db4-9e24-47cd-a986-f3d063a0474d" />
+
+
+> **Important:** Ensure the executing account has rights to run Veeam PowerShell cmdlets and access `Veeam.Backup.Validator.exe`.
 
 Key parameters:
 
