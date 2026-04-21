@@ -21,7 +21,7 @@ You can:
 ## 🙏 Credits
 
 *   **Shawn Masterson** – original script author
-*   **marcohorstmann** and the community – modernization and updates [[https://github.com/marcohorstmann/MyVeeamReport#contribution](https://github.com/marcohorstmann/MyVeeamReport)](https://github.com/marcohorstmann/MyVeeamReport)
+*   **marcohorstmann** and the community – modernization and updates https://github.com/marcohorstmann/MyVeeamReport
 *   Veeam PowerShell community contributors
 
 ***
