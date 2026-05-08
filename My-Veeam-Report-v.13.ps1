@@ -102,7 +102,7 @@ $excludevms = @()
 $excludeFolder = @()
 # Exclude VMs from Missing and Successful Backups sections in the following (vCenter) datacenter(s)
 # $excludeDC = @("dc1","dc2","dc*")
-$excludeDC = ()
+$excludeDC = @()
 # Exclude Templates from Missing and Successful Backups sections
 $excludeTemp = $false
 
