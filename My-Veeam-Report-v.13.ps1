@@ -76,7 +76,8 @@ $emailEnableSSL = $false
 $emailUser = ""
 $emailPass = ""
 $emailFrom = ""
-$emailTo = ""
+# Add "," for multiple recipients
+$emailTo = "" 
 # Send HTML report as attachment (else HTML report is body)
 $emailAttach = $false
 # Email Subject
@@ -320,8 +321,8 @@ $showLicExp = $true
 
 # Highlighting Thresholds
 # Repository Free Space Remaining %
-$repoCritical = 10
-$repoWarn = 20
+$repoCritical = 5
+$repoWarn = 8
 # Replica Target Free Space Remaining %
 $replicaCritical = 10
 $replicaWarn = 20
@@ -579,7 +580,7 @@ $backupsBk = @($jobBackups | Where-Object {$_.JobType -eq "Backup"})
 $backupsBc = @($jobBackups | Where-Object {$_.JobType -eq "BackupSync"})
 # Get Agent Backup Job Backups
 $backupsEp = @($jobBackups | Where-Object {$_.JobType -eq "EndpointBackup"})
-
+<#
 # Get all Media Pools
 $mediaPools = Get-VBRTapeMediaPool
 
@@ -594,7 +595,7 @@ $mediaLibs = Get-VBRTapeLibrary
 
 # Get all Tape Drives
 $mediaDrives = Get-VBRTapeDrive
-
+#>
 # Get Configuration Backup Info
 $configBackup = Get-VBRConfigurationBackupJob
 
@@ -2371,7 +2372,51 @@ If ($bodyJobsEp + $bodyJobSizeEp + $bodyAllSessEp + $bodyRunningEp + $bodySessWF
 
 $htmlOutput += $bodyJobsSb + $bodyAllSessSb + $bodyAllTasksSb + $bodyRunningSb + $bodyTasksRunningSb + $bodySessWFSb + $bodyTaskWFSb + $bodySessSuccSb + $bodyTaskSuccSb
 If ($bodyJobsSb + $bodyAllSessSb) { $htmlOutput += $HTMLbreak }
+# --- Custom: Replication, Backup Copy and Agent sessions ---
+$cutoff = (Get-Date).AddHours(-$HourstoCheck)
+$otherRows = @()
 
+# Replication + Backup Copy sessions
+Get-VBRBackupSession | Where-Object {
+  ($_.JobType -match 'Replica|Copy|Sync') -and ($_.CreationTime -ge $cutoff -or $_.State -eq 'Working')
+} | ForEach-Object {
+  $otherRows += [PSCustomObject]@{
+    'Job Name'            = $_.JobName
+    'Type'                = if ($_.JobType -match 'Replica') {'Replication'} else {'Backup Copy'}
+    'Start Time'          = $_.CreationTime
+    'Stop Time'           = if ($_.State -eq 'Working') {'-'} else {$_.EndTime}
+    'Duration (HH:MM:SS)' = Get-Duration -ts $_.Progress.Duration
+    'Result'              = if ($_.State -eq 'Working') {'Running'} else {[string]$_.Result}
+  }
+}
+
+# Agent backup sessions
+$agentJobs = @(Get-VBRComputerBackupJob)
+if ($agentJobs) {
+  Get-VBRComputerBackupJobSession | Where-Object { $_.CreationTime -ge $cutoff -or $_.State -eq 'Working' } | ForEach-Object {
+    $s = $_
+    $otherRows += [PSCustomObject]@{
+      'Job Name'            = ($agentJobs | Where-Object { $_.Id -eq $s.JobId }).Name
+      'Type'                = 'Agent Backup'
+      'Start Time'          = $s.CreationTime
+      'Stop Time'           = if ($s.State -eq 'Working') {'-'} else {$s.EndTime}
+      'Duration (HH:MM:SS)' = if ($s.State -eq 'Working') {'-'} else {Get-Duration -ts (New-TimeSpan $s.CreationTime $s.EndTime)}
+      'Result'              = if ($s.State -eq 'Working') {'Running'} else {[string]$s.Result}
+    }
+  }
+}
+
+if ($otherRows) {
+  $otherRows = $otherRows | Sort-Object 'Start Time'
+  if     ($otherRows.Result -contains 'Failed')  { $otherHead = $subHead01err }
+  elseif ($otherRows.Result -contains 'Warning') { $otherHead = $subHead01war }
+  elseif ($otherRows.Result -contains 'Success') { $otherHead = $subHead01suc }
+  else                                           { $otherHead = $subHead01 }
+  $bodyOther = $otherHead + "Replication, Backup Copy and Agent Sessions" + $subHead02 + ($otherRows | ConvertTo-Html -Fragment)
+  $htmlOutput += $bodyOther + $HTMLbreak
+}
+# --- End custom section ---
+$statusHtml = $htmlOutput + $bodySummaryConfig + $bodyProxy + $bodyRepo + $bodySORepo + $bodyRepoPerms + $bodyReplica + $bodyServices
 $htmlOutput += $bodySummaryConfig + $bodyProxy + $bodyRepo + $bodySORepo + $bodyRepoPerms + $bodyReplica + $bodyServices + $bodyLicense + $footerObj
 
 # Fix Details
@@ -2390,13 +2435,13 @@ $htmlOutput = $htmlOutput.Replace("<td>Critical<",  "<td style=""color: #ff0000;
 $htmlOutput = $htmlOutput.Replace("<td>Dead<",      "<td style=""color: #ff0000;"">Dead<")
 
 # Color Report Header and Tag Email Subject
-If ($htmlOutput -match "#FB9895") {
+If ($statusHtml -match "#FB9895") {
   $htmlOutput = $htmlOutput.Replace("ZZhdbgZZ", "#FB9895")
   $emailSubject = "[Failed] $emailSubject"
-} ElseIf ($htmlOutput -match "#ffd96c") {
+} ElseIf ($statusHtml -match "#ffd96c") {
   $htmlOutput = $htmlOutput.Replace("ZZhdbgZZ", "#ffd96c")
   $emailSubject = "[Warning] $emailSubject"
-} ElseIf ($htmlOutput -match "#00b050") {
+} ElseIf ($statusHtml -match "#00b050") {
   $htmlOutput = $htmlOutput.Replace("ZZhdbgZZ", "#00b050")
   $emailSubject = "[Success] $emailSubject"
 } Else {
@@ -2440,3 +2485,4 @@ Write-Progress -Activity "Operazione in corso" -Status "100% Completato" -Percen
 
 $endDate = $(Get-Date -UFormat "%m-%d-%Y_%H%M")
 write-host "Starting operations: $endDate"
+
